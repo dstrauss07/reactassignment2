@@ -1,17 +1,34 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import InputField from './InputField.Inputfield';
-import LengthParagraph from './LengthParagraph.LengthParagraph';
+import './Validation/Validation';
+import Validation from './Validation/Validation';
+import CharComponent from './CharComponent/CharComponent';
+
 
 class App extends Component{
+  state = {
+    userInput: ''
+  }
 
+  inputChangedHandler = (event) =>{
+    this.setState({userInput:event.target.value}); 
+  }
+  
   render(){
+    const style ={
+      display: 'inline-block',
+      padding: '16px',
+      textAlign: 'center',
+      margin: '16px',
+      border: '1px solid black'
+
+    }
     return(
     <div className="App">
-    <InputField />
-      <LengthParagraph />
-
+      <input type ="text" onChange={this.inputChangedHandler} value={this.state.userInput} />
+     <Validation 
+      textLength={this.state.userInput.length}/>
+    <CharComponent style= {style} userInputValues = {this.state.userInput}  textLength = {this.state.userInput.length}/>
     </div>
     );
   }
